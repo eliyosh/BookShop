@@ -5,8 +5,8 @@ import { Category } from './category/category';
 
 export const routes: Routes = [
     {path: 'home', component: Home},
-    {path: 'new-release', component: NewBooks},
-    {path: 'categories', component: Category},
+    {path: 'order', component: NewBooks},
+    {path: 'pages', component: Category},
     {path: '**', redirectTo: 'home', pathMatch:'full'}
 
 ];
