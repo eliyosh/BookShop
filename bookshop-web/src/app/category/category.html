@@ -1,1 +1,19 @@
-<p>category works!</p>
+<div class="pages-layout">
+  <h2>Genre Collection Pages</h2>
+ 
+  <p class="status">Viewing Mode: <strong>GENRE CATALOG</strong></p>
+  
+  <div class="catalog-grid">
+    @for (book of cartService.filteredInventory(); track book.id) {
+     
+      @if (book.type === cartService.selectedFormat()) {
+        <div class="catalog-card" (click)="cartService.openDetails(book)">
+          <h3>{{ book.title }}</h3>
+          <p class="meta">By {{ book.author }}</p>
+          <span class="badge">{{ book.type }}</span>
+          <p class="cost">₱{{ book.price }}</p>
+        </div>
+      }
+    }
+  </div>
+</div>

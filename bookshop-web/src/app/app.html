@@ -1,58 +1,67 @@
-
 <app-navbar />
 
 <router-outlet />
 
-<!-- quantity selector modal -->
+<!-- conditional detail popup component display modal -->
 @if (cartService.selectedBook()) {
-  <div class="modal-overlay" (click)="cartService.closeDetails()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>{{ cartService.selectedBook().title }}</h2>
-      <p class="author">By {{ cartService.selectedBook().author }}</p>
+  <div class="modal-backdrop" (click)="cartService.closeDetails()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <h2>{{ cartService.selectedBook()?.title }}</h2>
+      <p class="author">By {{ cartService.selectedBook()?.author }}</p>
+      <p class="genre-tag">Genre: {{ cartService.selectedBook()?.genre }}</p>
+      <p class="age-tag">Target: {{ cartService.selectedBook()?.ageGroup }} ({{ cartService.selectedBook()?.yearPublished }})</p>
       <hr>
-      <p class="description">{{ cartService.selectedBook().description }}</p>
-      <p class="meta"><strong>Genre:</strong> {{ cartService.selectedBook().genre }}</p>
-      <p class="meta"><strong>Age Group:</strong> {{ cartService.selectedBook().ageGroup }}</p>
-      <p class="meta"><strong>Year:</strong> {{ cartService.selectedBook().yearPublished }}</p>
+      <p class="desc">{{ cartService.selectedBook()?.description }}</p>
       
-      <!-- format selector toggle input frame -->
-      <div class="format-toggle">
+      <!-- formatting selector toggle layout module tools -->
+      <div class="format-toggle-zone">
         <label>Choose Format:</label>
-        <select #formatSelect [value]="cartService.selectedFormat()" (change)="cartService.selectedFormat.set(formatSelect.value === 'E-Book' ? 'E-Book' : 'Hardbound')">
-          <option value="Hardbound">Physical / Hardbound</option>
-          <option value="E-Book">E-Book (Save ₱300)</option>
-        </select>
-      </div>
-
-      <div class="price-display">
-        @if (formatSelect.value === 'E-Book') {
-          <span>Price: ₱{{ cartService.selectedBook().price - 300 }}</span>
-        } @else {
-          <span>Price: ₱{{ cartService.selectedBook().price }}</span>
+        <div class="toggle-buttons">
+        
+          <button type="button" 
+                  [class.active-toggle]="cartService.selectedFormat() === 'Hardbound'"
+                  (click)="cartService.selectedFormat.set('Hardbound')">
+            Hardbound (₱{{ cartService.selectedBook()?.price }})
+          </button>
+          <button type="button" 
+                  [class.active-toggle]="cartService.selectedFormat() === 'E-Book'"
+                  (click)="cartService.selectedFormat.set('E-Book')">
+            E-Book (₱{{ cartService.selectedBook()?.price - 300 }})
+          </button>
+        </div>
+        @if (cartService.selectedFormat() === 'E-Book') {
+          <small class="discount-note">🎁 e-book discount of ₱300 applied!</small>
         }
       </div>
 
-      <div class="modal-actions">
-        <button class="add-order-btn" (click)="cartService.addToCart(cartService.selectedBook(), formatSelect.value === 'E-Book' ? 'E-Book' : 'Hardbound'); cartService.closeDetails()">
-          Add to Order
+      <div class="actions">
+        <button class="add-btn" (click)="cartService.addToCart(cartService.selectedBook(), cartService.selectedFormat())">
+          Add to Order Kiosk
         </button>
-        <button class="close-modal-btn" (click)="cartService.closeDetails()">Cancel</button>
+        <button class="close-btn" (click)="cartService.closeDetails()">Close</button>
       </div>
     </div>
   </div>
 }
 
-<!-- footnote target alignment block -->
-<footer id="footnote-about">
-  <div class="footer-wrapper">
-    <div class="footer-column">
+<footer id="about-footnote">
+  <div class="footer-grid">
+    <div>
       <h3>About Us</h3>
-      <p>The Ellavated Page is a premium digital kiosk. We bring stories right to your reading hands.</p>
+      <p>The Ellavated Bookshop is where wit meets written word. Founded on a love for stories.</p>
     </div>
-    <div class="footer-column">
-      <h3>Contact</h3>
-      <p>Email: contact@ellavatedpage.com</p>
-      <p>Location: Manila, Philippines</p>
+    <div>
+      <h3>Contact Info</h3>
+      <p>Phone: +63 (02) 8123 4567</p>
+      <p>Address: 123 Padre Burgos Ave, Ermita, Manila</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <p>New Arrivals / Store Events / FAQs</p>
+    </div>
+    <div>
+      <h3>Join The Chapter</h3>
+      <p>@EllavatedBooks on all social pages.</p>
     </div>
   </div>
 </footer>

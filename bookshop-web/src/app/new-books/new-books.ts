@@ -7,14 +7,12 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './new-books.html',
   styleUrl: './new-books.css'
 })
-export class NewBooks{
-  // input decorator channel definition
-  booksData = input.required<any[]>();
+export class NewBooks {
+  
+  featuredBooks = input.required<any[]>();
+  orderTrigger = output<any>();
 
-  // output decorator channel definition
-  triggerOrder = output<any>();
-
-  broadcastClickEvent(book: any) {
-    this.triggerOrder.emit(book);
+  select(book: any) {
+    this.orderTrigger.emit(book);
   }
 }

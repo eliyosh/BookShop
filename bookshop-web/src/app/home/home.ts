@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CartService } from '../cart';
-import { NewBooks } from '../new-books/new-books';
+import { NewBooks } from '../new-books/new-books'; 
 
 @Component({
   selector: 'app-home',
@@ -12,13 +12,17 @@ import { NewBooks } from '../new-books/new-books';
 export class Home {
   cartService = inject(CartService);
 
-  // function para sa event selection click binding trigger
-  selectBook(book: any) {
-    this.cartService.openDetails(book);
-  }
+  // filters top 3 highest sales counts for highly judge section
+  topSellers = computed(() => {
+    return [...this.cartService.inventory()]
+      .sort((a, b) => b.salesCount - a.salesCount)
+      .slice(0, 3);
+  });
 
-  // function para sa reusable child output handler mapping logic
-  handleChildOrderEvent(book: any) {
-    this.cartService.openDetails(book);
-  }
+  // filters top 3 highest read counts for shelf burners section
+  mostRead = computed(() => {
+    return [...this.cartService.inventory()]
+      .sort((a, b) => b.readCount - a.readCount)
+      .slice(0, 3);
+  });
 }
