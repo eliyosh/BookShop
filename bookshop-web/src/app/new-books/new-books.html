@@ -1,1 +1,8 @@
-<p>new-books works!</p>
+<div class="new-arrivals-row">
+  @for (book of booksData().slice(0, 2); track book.id) {
+    <div class="spine-banner-cover" [style.background-color]="book.id === 1 ? '#f15025' : '#064e3b'" (click)="broadcastClickEvent(book)">
+      <h3 class="spine-title">{{ book.title }}</h3>
+      <p class="spine-author">{{ book.author }}</p>
+    </div>
+  }
+</div>

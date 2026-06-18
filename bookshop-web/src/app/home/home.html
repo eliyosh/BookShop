@@ -1,1 +1,85 @@
-<p>home works!</p>
+<div class="home-split-viewport">
+  
+  <!-- left blue-->
+  <div class="navy-side-canvas">
+    <h2 class="row-title italic-quote">Judge These Safely By Their Covers</h2>
+    
+    <!-- child component injection-->
+    <app-new-books [booksData]="cartService.filteredInventory()" (triggerOrder)="handleChildOrderEvent($event)" />
+
+    <!-- top bestseller products row layout loop -->
+    <div class="shelf-label-banner">HIGHLY JUDGE</div>
+    <div class="books-shelf-grid">
+      @for (book of cartService.filteredInventory(); track book.id) {
+        @if (book.salesCount >= 120) {
+          <div class="book-cover-card item-style-pink" (click)="selectBook(book)">
+            <p class="title-text">{{ book.title }}</p>
+            <p class="author-text">{{ book.author }}</p>
+          </div>
+        }
+      }
+    </div>
+
+    <!-- most read products row layout loop -->
+    <div class="shelf-label-banner">SHELF BURNERS</div>
+    <div class="books-shelf-grid">
+      @for (book of cartService.filteredInventory(); track book.id) {
+        @if (book.readCount >= 150) {
+          <div class="book-cover-card item-style-purple" (click)="selectBook(book)">
+            <p class="title-text">{{ book.title }}</p>
+            <p class="author-text">{{ book.author }}</p>
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- calculation side column -->
+  <div class="yellow-side-canvas">
+    <div class="sticky-order-calculator">
+      <h3>🛒 YOUR ORDER LIST</h3>
+      <hr>
+
+      <div class="cart-items-scroller">
+        @for (item of cartService.cart(); track $index) {
+          <div class="order-row-item">
+            <div class="item-details">
+              <strong>{{ item.title }}</strong>
+              <br><small>Format: {{ item.format }} | Price: ₱{{ item.price }}</small>
+            </div>
+            
+            <div class="quantity-controls">
+              <button class="qty-btn" (click)="cartService.updateQuantity(item.id, item.format, -1)">-</button>
+              <span class="qty-count">{{ item.quantity }}</span>
+              <button class="qty-btn" (click)="cartService.updateQuantity(item.id, item.format, 1)">+</button>
+            </div>
+
+            <button class="remove-item-btn" (click)="cartService.removeFromCart(item.id, item.format)">Delete</button>
+          </div>
+        } @empty {
+          <p class="empty-cart-notice">No books added to checkout order yet.</p>
+        }
+      </div>
+
+      <!-- computing price summary container box block layout element -->
+      <div class="calculation-summary-box">
+        <div class="calc-line">
+          <span>Order Subtotal:</span>
+          <strong>₱{{ cartService.totalPrice() }}</strong>
+        </div>
+        <div class="calc-line">
+          <span>Shipping fee:</span>
+          <span style="color: green; font-weight: bold;">FREE</span>
+        </div>
+        <hr>
+        <div class="calc-line total-highlight">
+          <span>Total Price calculation:</span>
+          <strong>₱{{ cartService.totalPrice() }}</strong>
+        </div>
+        <button class="checkout-submit-btn" [disabled]="cartService.cart().length === 0" (click)="cartService.clearCart()">
+          PLACE ORDER / CLEAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -84,6 +84,6 @@ color: var(--primary-gold);
 margin: 0.75rem 0; }
   `]
 })
-export class CategoryComponent {
+export class Category{
   cartService = inject(CartService);
 }

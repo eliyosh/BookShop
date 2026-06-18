@@ -3,7 +3,7 @@
 
 <router-outlet />
 
-<!-- quantity, overlay-->
+<!-- quantity selector modal -->
 @if (cartService.selectedBook()) {
   <div class="modal-overlay" (click)="cartService.closeDetails()">
     <div class="modal-content" (click)="$event.stopPropagation()">
@@ -15,7 +15,7 @@
       <p class="meta"><strong>Age Group:</strong> {{ cartService.selectedBook().ageGroup }}</p>
       <p class="meta"><strong>Year:</strong> {{ cartService.selectedBook().yearPublished }}</p>
       
-      <!--format toggle input -->>
+      <!-- format selector toggle input frame -->
       <div class="format-toggle">
         <label>Choose Format:</label>
         <select #formatSelect [value]="cartService.selectedFormat()" (change)="cartService.selectedFormat.set(formatSelect.value === 'E-Book' ? 'E-Book' : 'Hardbound')">
@@ -42,7 +42,7 @@
   </div>
 }
 
-<!-- footnote  -->
+<!-- footnote target alignment block -->
 <footer id="footnote-about">
   <div class="footer-wrapper">
     <div class="footer-column">
