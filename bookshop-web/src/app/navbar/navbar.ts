@@ -9,7 +9,7 @@ import { CartService } from '../cart';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
-export class NavbarComponent {
+export class Navbar {
   cartService = inject(CartService);
 
   onSearch(event: Event) {

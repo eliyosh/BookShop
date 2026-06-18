@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { CartService } from './cart';
