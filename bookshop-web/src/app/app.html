@@ -1,67 +1,101 @@
 <app-navbar />
 
-<router-outlet />
-
-<!-- conditional detail popup component display modal -->
-@if (cartService.selectedBook()) {
-  <div class="modal-backdrop" (click)="cartService.closeDetails()">
-    <div class="modal-box" (click)="$event.stopPropagation()">
-      <h2>{{ cartService.selectedBook()?.title }}</h2>
-      <p class="author">By {{ cartService.selectedBook()?.author }}</p>
-      <p class="genre-tag">Genre: {{ cartService.selectedBook()?.genre }}</p>
-      <p class="age-tag">Target: {{ cartService.selectedBook()?.ageGroup }} ({{ cartService.selectedBook()?.yearPublished }})</p>
-      <hr>
-      <p class="desc">{{ cartService.selectedBook()?.description }}</p>
+<!-- for split-->
+<div class="app-split-background-shell">
+  
+  <!-- left side bar section -->
+  <div class="main-content-canvas-area">
+    <main class="store-container">
+     
+      <router-outlet />
       
-      <!-- formatting selector toggle layout module tools -->
-      <div class="format-toggle-zone">
-        <label>Choose Format:</label>
-        <div class="toggle-buttons">
+    </main>
+    <footer id="app-footer" class="main-footer">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>ABOUT US</h4>
+          <p>The Ellavated Bookshop is where wit meets the written word. Founded on a love for uncracked spines and clever lines, we curate an elite selection of fiction, art, and timeless classics.</p>
+        </div>
+        <div class="footer-col">
+          <h4>CONTACT INFO</h4>
+          <p>Phone: +63 (02) 8123-4567</p>
+          <p>Email: EL@ellavatedbooks.com</p>
+          <p>Address: 123 Padre Burgos Ave, Ermita, Manila, 1000</p>
+        </div>
+        <div class="footer-col">
+          <h4>QUICK LINKS</h4>
+          <ul>
+            <li>New Arrivals (Hot Off the Press!)</li>
+            <li>Art & Coffee Table Books</li>
+            <li>Store Events & Gallery Schedule</li>
+            <li>Shipping & Return Policy / FAQs</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>JOIN THE CHAPTER</h4>
+          <p>[Instagram] @EllavatedBooks</p>
+          <p>[TikTok] @EllavatedReads</p>
+          <p>[Facebook] EllavatedBookshop</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> 
+
+  <!-- right side bar section -->
+
+</div> 
+
+<!--pop up section-->
+@if (cartService.selectedBook()) {
+  <div class="modal-overlay">
+    <div class="modal-card">
+      <button class="close-top-btn" (click)="cartService.closeDetails()">✕ CLOSE</button>
+      
+      <div class="modal-split-layout">
+        <div class="modal-cover-side">
+          <img [src]="cartService.selectedBook()?.cover" alt="Detail Cover" class="modal-large-img">
+        </div>
         
-          <button type="button" 
-                  [class.active-toggle]="cartService.selectedFormat() === 'Hardbound'"
-                  (click)="cartService.selectedFormat.set('Hardbound')">
-            Hardbound (₱{{ cartService.selectedBook()?.price }})
-          </button>
-          <button type="button" 
-                  [class.active-toggle]="cartService.selectedFormat() === 'E-Book'"
-                  (click)="cartService.selectedFormat.set('E-Book')">
-            E-Book (₱{{ cartService.selectedBook()?.price - 300 }})
+        <div class="modal-details-side">
+          <h2>{{ cartService.selectedBook()?.title }}</h2>
+          <p class="author-sub">By {{ cartService.selectedBook()?.author }}</p>
+          
+          <hr class="divider-line">
+          
+          <div class="metadata-grid-block">
+            <p><strong>Genre:</strong> {{ cartService.selectedBook()?.genre }}</p>
+            <p><strong>Target Age:</strong> {{ cartService.selectedBook()?.ageGroup }}</p>
+            <p><strong>Year Published:</strong> {{ cartService.selectedBook()?.yearPublished }}</p>
+            
+            <!--format choice -->
+            <div style="margin: 1rem 0; display: flex; align-items: center; gap: 1rem;">
+              <strong style="color: var(--primary-gold);">Select Edition Format:</strong>
+              <select 
+                [value]="cartService.selectedFormat()" 
+                (change)="cartService.selectedFormat.set($any($event.target).value)"
+                style="background: var(--bg-dark-blue); color: white; border: 1px solid var(--primary-gold); padding: 0.4rem; font-family: inherit;">
+                <option value="Hardbound">📚 Hardbound (Physical Copy)</option>
+                <option value="E-Book">💻 E-Book (Read Online - Saves ₱300)</option>
+              </select>
+            </div>
+
+            <p class="price-highlight">
+              <strong>Price Amount:</strong> 
+              ₱{{ cartService.selectedFormat() === 'E-Book' ? cartService.selectedBook()?.price - 300 : cartService.selectedBook()?.price }}
+            </p>
+          </div>
+
+          <hr class="divider-line">
+          
+          <p class="desc-text"><strong>Synopsis:</strong><br>{{ cartService.selectedBook()?.description }}</p>
+          
+          <button class="kiosk-box-btn" (click)="cartService.addToCart(cartService.selectedBook(), cartService.selectedFormat()); cartService.closeDetails()">
+            🛒 ADD TO BAG AS {{ cartService.selectedFormat() }}
           </button>
         </div>
-        @if (cartService.selectedFormat() === 'E-Book') {
-          <small class="discount-note">🎁 e-book discount of ₱300 applied!</small>
-        }
-      </div>
-
-      <div class="actions">
-        <button class="add-btn" (click)="cartService.addToCart(cartService.selectedBook(), cartService.selectedFormat())">
-          Add to Order Kiosk
-        </button>
-        <button class="close-btn" (click)="cartService.closeDetails()">Close</button>
       </div>
     </div>
   </div>
 }
 
-<footer id="about-footnote">
-  <div class="footer-grid">
-    <div>
-      <h3>About Us</h3>
-      <p>The Ellavated Bookshop is where wit meets written word. Founded on a love for stories.</p>
-    </div>
-    <div>
-      <h3>Contact Info</h3>
-      <p>Phone: +63 (02) 8123 4567</p>
-      <p>Address: 123 Padre Burgos Ave, Ermita, Manila</p>
-    </div>
-    <div>
-      <h3>Quick Links</h3>
-      <p>New Arrivals / Store Events / FAQs</p>
-    </div>
-    <div>
-      <h3>Join The Chapter</h3>
-      <p>@EllavatedBooks on all social pages.</p>
-    </div>
-  </div>
-</footer>

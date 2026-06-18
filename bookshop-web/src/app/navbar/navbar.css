@@ -1,72 +1,67 @@
-
-.navbar-wrapper {
-  background-color: #1a2542;
-  padding: 1.5rem 2rem;
+.main-header {
+  background-color: var(--bg-dark-blue);
+  padding: 1.5rem 0rem;
+  border-bottom: 2px solid var(--primary-gold);
+}
+.brand-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
 }
-.brand-header {
-  color: white;
-  font-family: 'Cinzel', serif;
-  font-size: 2.2rem;
-  font-weight: bold;
-  letter-spacing: 2px;
+.brand-title {
+ font-family: 'Material Symbols Rounded', sans-serif;
+  font-size: 3.2rem;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: var(--text-white);
+  letter-spacing: 20px; 
+  font-weight: semi-bold;
+  margin: 2rem 0 0 2rem;
+
 }
-.controls-cluster {
+.search-box {
   display: flex;
-  align-items: center;
+  gap: 0.5rem;
+}
+.search-box input {
+  background: var(--bg-accent-blue);
+  border: 1px solid var(--primary-gold);
+  color: var(--text-white);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+.search-btn {
+  background: var(--bg-accent-blue);
+  color: var(--text-white);
+  border: 1px solid var(--primary-gold);
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+.nav-bar-links {
+  display: flex;
+  justify-content: flex-end;
   gap: 1.5rem;
-  flex-wrap: wrap;
+  padding: 0 2rem;
+  margin-bottom: 1rem;
 }
-.search-input-box input {
-  padding: 0.5rem;
-  width: 200px;
-  border: none;
-  border-radius: 4px;
-}
-.navigation-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-}
-.navigation-links a {
-  color: #e4be49;
+
+.nav-bar-links a {
+  background-color: var(--primary-gold);
+  color: var(--bg-dark-blue);
+  padding: 0.5rem 1.5rem;
   text-decoration: none;
   font-weight: bold;
   font-size: 0.9rem;
-  padding: 0.3rem 0.5rem;
-}
-.active-tab {
-  border-bottom: 2px solid #e4be49;
-}
-.dropdown-tab {
-  position: relative;
-}
-.dropdown-menu-list {
-  display: none;
-  position: absolute;
-  background-color: #1a2542;
-  min-width: 120px;
-  z-index: 10;
-}
-.dropdown-menu-list a {
-  color: white;
-  display: block;
-  padding: 0.5rem;
-}
-.dropdown-tab:hover .dropdown-menu-list {
-  display: block;
+  cursor: pointer;
 }
 
-/* responsiveness */
-@media (max-width: 768px) {
-  .navbar-wrapper, .controls-cluster {
-    flex-direction: column;
-    text-align: center;
-  }
+.active {
+  background-color: var(--text-white) !important;
+  color: var(--bg-dark-blue) !important;
+  font-family: 'Matangi';
+}
+
+.scroll-link:hover {
+  background-color: black;
 }

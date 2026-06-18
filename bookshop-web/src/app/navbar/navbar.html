@@ -1,24 +1,16 @@
-<nav class="navbar-wrapper">
-  <!-- header -->
-  <div class="brand-header">ELLAVATED PAGE</div>
-
-  <!-- grouping panel-->
-  <div class="controls-cluster">
-    <div class="search-input-box">
-      <!-- direct search -->
-      <input type="text" placeholder="Search book title or author..." [ngModel]="cartService.searchQuery()" (ngModelChange)="cartService.searchQuery.set($event)">
+<header class="main-header">
+  <div class="brand-bar">
+    <span class="brand-title">ELLAVATED PAGE</span>
+    <div class="search-box">
+      <input type="text" placeholder="SEARCH INVENTORY..." (input)="onSearch($event)">
+      <button class="search-btn">SEARCH</button>
     </div>
-
-    <ul class="navigation-links">
-      <li><a routerLink="/home" routerLinkActive="active-tab">HOME</a></li>
-      <li><a href="#" (click)="scrollToFootnote($event)">ABOUT</a></li>
-      <li class="dropdown-tab">
-        <a routerLink="/pages" routerLinkActive="active-tab" (click)="setGenre('all')">PAGES</a>
-        <div class="dropdown-menu-list">
-          <a routerLink="/pages" (click)="setGenre('E-Book')">E-BOOK</a>
-          <a routerLink="/pages" (click)="setGenre('Physical')">HARDBOUND</a>
-        </div>
-      </li>
-    </ul>
   </div>
-</nav>
+  
+  <nav class="nav-bar-links">
+    <a routerLink="/home" routerLinkActive="active">HOME</a>
+    <a (click)="scrollToFooter()" class="scroll-link">ABOUT</a>
+    <a routerLink="/pages" routerLinkActive="active">PAGES</a>
+    <a routerLink="/order" routerLinkActive="active">ORDER</a>
+  </nav>
+</header>
