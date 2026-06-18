@@ -1,1 +1,196 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --bg-dark-blue: #0b1325;
+    --bg-accent-blue: #1c2a4a;
+    --primary-gold: #e0a916;
+    --text-white: #ffffff;
+    --text-light: #cdcdcd;
+    --accent-pink: #ff4a7d;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: var(--bg-dark-blue);
+    color: var(--text-white);
+  }
+  
+  .store-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+  }
+  
+  /*box button*/
+  .kiosk-box-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--primary-gold);
+    color: var(--bg-dark-blue);
+    border: 2px solid var(--primary-gold);
+    border-radius: 0px !important; 
+    padding: 0.6rem 1.2rem;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto; 
+  }
+  
+  .kiosk-box-btn:hover {
+    background-color: transparent;
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+  }
+  
+  /* image */
+  .kiosk-cover-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; 
+    border: 1px solid var(--primary-gold);
+    margin-bottom: 0.75rem;
+  }
+  
+  /* overlay panels */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 11, 20, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal-card {
+    background-color: var(--bg-accent-blue);
+    border: 2px solid var(--primary-gold);
+    border-radius: 0px;
+    width: 750px;
+    max-width: 95%;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  }
+  
+  .close-top-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    color: var(--accent-pink);
+    border: 1px solid var(--accent-pink);
+    padding: 0.4rem 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  
+  .modal-split-layout {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 1rem;
+  }
+  
+  .modal-cover-side {
+    flex: 1;
+    background: var(--bg-dark-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--primary-gold);
+    min-height: 250px;
+  }
+  
+  .modal-large-img {
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+  }
+  
+  .modal-details-side {
+    flex: 2;
+  }
+  
+  .modal-details-side h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--text-white);
+  }
+  
+  .author-sub {
+    color: var(--primary-gold);
+    font-style: italic;
+    margin: 0.3rem 0 1rem 0;
+    font-size: 1.05rem;
+  }
+  
+  .divider-line {
+    border: 0;
+    border-top: 1px solid #3a4b73;
+    margin: 1rem 0;
+  }
+  
+  .metadata-grid-block p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+  
+  .price-highlight {
+    color: var(--primary-gold);
+    font-size: 1.15rem;
+  }
+  
+  .desc-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+  
+  /* footnote */
+  .main-footer {
+    background-color: #050b14;
+    color: var(--text-light);
+    padding: 4rem 2rem;
+    border-top: 3px solid var(--primary-gold);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-top: 5rem;
+  }
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+  }
+  .footer-col h4 {
+    color: var(--primary-gold);
+    letter-spacing: 2px;
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1c2a4a;
+    padding-bottom: 0.5rem;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-col ul li {
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+  }
+  .footer-col ul li:hover {
+    color: var(--primary-gold);
+  }
+  
